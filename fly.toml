@@ -1,3 +1,8 @@
+# fly.toml app configuration file generated for tss-realtime on 2026-05-15T05:36:06Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
 app = "tss-realtime"
 primary_region = "iad"
 
@@ -25,5 +30,6 @@ primary_region = "iad"
 
 [[vm]]
   cpus = 1
-  cpu_kind = "shared"
-  memory = "256mb"
+  cpu_kind = 'shared'
+  memory = '256mb'
+  memory_mb = 256
