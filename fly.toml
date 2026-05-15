@@ -4,7 +4,7 @@
 #
 
 app = "tss-realtime"
-primary_region = "iad"
+primary_region = "sin"
 
 [build]
   dockerfile = "Dockerfile"
@@ -29,7 +29,7 @@ primary_region = "iad"
   path = "/health"
 
 [[vm]]
-  cpus = 1
+  cpus = 2
   cpu_kind = 'shared'
-  memory = '256mb'
-  memory_mb = 256
+  memory = '512mb'
+  memory_mb = 512
