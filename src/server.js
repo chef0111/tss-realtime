@@ -53,7 +53,8 @@ app.post('/internal/broadcast', (req, res) => {
   }
   const room = `tournament:${tournamentId}`;
   io.to(room).emit('invalidate', event);
-  res.json({ ok: true, room });
+  io.to('arena').emit('invalidate', event);
+  res.json({ ok: true, room, arena: true });
 });
 
 io.use(async (socket, next) => {
@@ -69,17 +70,22 @@ io.use(async (socket, next) => {
     const { payload } = await jwtVerify(token, jwtSecretBytes, {
       algorithms: ['HS256'],
     });
-    const tournamentId = payload.tid;
-    const sub = payload.sub;
-    if (typeof tournamentId !== 'string' || !tournamentId) {
-      next(new Error('invalid_tid'));
+    const tid =
+      typeof payload.tid === 'string' && payload.tid.length > 0
+        ? payload.tid
+        : null;
+    const arenaCatalog = payload.cat === 'arena';
+    if (!tid && !arenaCatalog) {
+      next(new Error('invalid_claims'));
       return;
     }
+    const sub = payload.sub;
     if (typeof sub !== 'string' || !sub) {
       next(new Error('invalid_sub'));
       return;
     }
-    socket.data.tournamentId = tournamentId;
+    socket.data.tournamentId = tid;
+    socket.data.arenaCatalog = arenaCatalog;
     socket.data.userId = sub;
     next();
   } catch {
@@ -88,6 +94,10 @@ io.use(async (socket, next) => {
 });
 
 io.on('connection', (socket) => {
+  if (socket.data.arenaCatalog) {
+    void socket.join('arena');
+    return;
+  }
   const tid = socket.data.tournamentId;
   const room = `tournament:${tid}`;
   void socket.join(room);
