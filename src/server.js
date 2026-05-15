@@ -1,8 +1,3 @@
-/**
- * Tournament Socket.io gateway (single Node instance, no Redis).
- * - Browsers: HS256 JWT from main app in handshake `auth.token` (claims: `sub`, `tid`).
- * - Main app (Vercel): POST /internal/broadcast with Authorization: Bearer <INTERNAL_BROADCAST_SECRET>
- */
 import { createServer } from 'node:http';
 import express from 'express';
 import { jwtVerify } from 'jose';
