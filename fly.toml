@@ -11,7 +11,7 @@ primary_region = "sin"
 
 [env]
   PORT = "3331"
-  CORS_ORIGINS = "https://tku-sparring.vercel.app,https://tku-sparring.localhost"
+  CORS_ORIGINS = "https://tku-sparring.vercel.app,https://tku-sparring.localhost,https://tss.localhost"
 
 [http_service]
   internal_port = 3331
