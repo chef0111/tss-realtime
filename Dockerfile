@@ -1,8 +1,8 @@
-FROM node:22-alpine
+FROM oven/bun:1-alpine
 WORKDIR /app
-COPY package.json package-lock.json* ./
-RUN npm ci 2>/dev/null || npm install
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile --production
 COPY src ./src
 ENV NODE_ENV=production
 EXPOSE 3331
-CMD ["node", "src/server.js"]
+CMD ["bun", "src/index.ts"]

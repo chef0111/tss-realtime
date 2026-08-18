@@ -24,9 +24,13 @@ Room per connection: `tournament:<tournamentId>` (derived from JWT `tid` claim).
 
 ## Local dev
 
+TypeScript, run with Bun (no compile step).
+
 ```bash
 bun install
 bun run dev
+bun run typecheck
+bun test
 ```
 
 Point the main app at `http://localhost:3331` (`VITE_REALTIME_URL`, `REALTIME_INTERNAL_BROADCAST_URL`).
