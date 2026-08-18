@@ -32,7 +32,9 @@ export type RealtimeConfig = {
 const DEFAULT_PORT = 3331;
 const DEFAULT_CORS_ORIGIN = 'http://localhost:3000';
 
-export function loadConfig(env: NodeJS.ProcessEnv): RealtimeConfig {
+export function loadConfig(
+  env: Record<string, string | undefined>
+): RealtimeConfig {
   const jwtSecretRaw = env.TOURNAMENT_SOCKET_JWT_SECRET ?? '';
   const broadcastSecret = env.INTERNAL_BROADCAST_SECRET ?? '';
 
