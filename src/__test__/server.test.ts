@@ -1,11 +1,11 @@
-import { afterEach, describe, expect, test } from 'bun:test';
 import { SignJWT } from 'jose';
 import { io as ioc } from 'socket.io-client';
+import { afterEach, describe, expect, test } from 'vitest';
 
-import { createRealtimeServer } from './server';
-import type { RealtimeServer } from './server';
-import type { RealtimeConfig, TournamentInvalidateEvent } from './parse';
+import { createRealtimeServer } from '../server';
 import type { AddressInfo } from 'node:net';
+import type { RealtimeConfig, TournamentInvalidateEvent } from '../parse';
+import type { RealtimeServer } from '../server';
 
 const JWT_SECRET = 'test-jwt-secret-that-is-at-least-32-chars';
 const BROADCAST_SECRET = 'test-broadcast-secret';
@@ -37,9 +37,9 @@ async function listen(server: RealtimeServer) {
 async function signToken(claims: { tid: string } | { cat: 'arena' }) {
   return new SignJWT(claims)
     .setProtectedHeader({ alg: 'HS256' })
-    .setSubject('user-1')
     .setIssuedAt()
     .setExpirationTime('5m')
+    .setSubject('user-1')
     .sign(new TextEncoder().encode(JWT_SECRET));
 }
 

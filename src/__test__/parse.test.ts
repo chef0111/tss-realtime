@@ -1,11 +1,12 @@
-import { describe, expect, test } from 'bun:test';
+import { describe, expect, test } from 'vitest';
+
 import {
   parseBroadcast,
   parseCorsOrigins,
   parsePort,
   parseSocketClaims,
   readAuthToken,
-} from './parse';
+} from '../parse';
 import type { JWTPayload } from 'jose';
 
 describe('parsePort', () => {

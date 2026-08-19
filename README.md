@@ -24,13 +24,13 @@ Room per connection: `tournament:<tournamentId>` (derived from JWT `tid` claim).
 
 ## Local dev
 
-TypeScript, run with Bun (no compile step).
+TypeScript, run with Node via `tsx` (no `.js` import suffixes, no compile step).
 
 ```bash
 bun install
 bun run dev
 bun run typecheck
-bun test
+bun run test
 ```
 
-Point the main app at `http://localhost:3331` (`VITE_REALTIME_URL`, `REALTIME_INTERNAL_BROADCAST_URL`).
+Point the main app at `http://localhost:3331` for server-side broadcast (`REALTIME_INTERNAL_BROADCAST_URL`) and `https://ws.tss.localhost` for the browser (`VITE_REALTIME_URL`) when using Portless. Node cannot resolve `*.localhost` on Windows.
