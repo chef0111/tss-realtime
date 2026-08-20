@@ -1,4 +1,4 @@
-# TKU Sparring — tournament realtime (Socket.io)
+# Kyorbit — Tournament realtime
 
 Single-process Socket.io server: browsers subscribe per tournament room; the main app notifies this service over HTTPS after mutations.
 

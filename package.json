@@ -1,5 +1,5 @@
 {
-  "name": "tss-realtime",
+  "name": "kyorbit-realtime",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -7,8 +7,9 @@
     "node": ">=22"
   },
   "scripts": {
-    "dev": "portless ws.tss --app-port 3331 node --import tsx --watch src/index.ts",
-    "start": "portless ws.tss --app-port 3331 node --import tsx src/index.ts",
+    "dev": "portless ws.kyorbit --app-port 3331 node --import tsx --watch src/index.ts",
+    "start": "portless ws.kyorbit --app-port 3331 node --import tsx src/index.ts",
+    "build": "bun build src/index.ts --outfile index.js --target node --format esm --packages=external",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },

@@ -16,3 +16,5 @@ httpServer.on('error', (err) => {
 httpServer.listen(config.port, host, () => {
   console.log(`[realtime] listening on ${host}:${config.port}`);
 });
+
+export default httpServer;
