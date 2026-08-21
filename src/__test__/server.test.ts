@@ -2,10 +2,10 @@ import { SignJWT } from 'jose';
 import { io as ioc } from 'socket.io-client';
 import { afterEach, describe, expect, test } from 'vitest';
 
-import { createRealtimeServer } from '../server';
+import { createRealtimeServer } from '../create-server';
+import type { RealtimeServer } from '../create-server';
 import type { AddressInfo } from 'node:net';
 import type { RealtimeConfig, TournamentInvalidateEvent } from '../parse';
-import type { RealtimeServer } from '../server';
 
 const JWT_SECRET = 'test-jwt-secret-that-is-at-least-32-chars';
 const BROADCAST_SECRET = 'test-broadcast-secret';
@@ -73,6 +73,14 @@ describe('realtime http', () => {
     await new Promise<void>((resolve, reject) => {
       closing.httpServer.close((err) => (err ? reject(err) : resolve()));
     });
+  });
+
+  test('GET /', async () => {
+    server = createRealtimeServer(testConfig());
+    const origin = await listen(server);
+    const res = await fetch(`${origin}/`);
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ message: 'Kyorbit real-time service' });
   });
 
   test('GET /health', async () => {
