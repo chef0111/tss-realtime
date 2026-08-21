@@ -32,6 +32,10 @@ export function createRealtimeServer(config: RealtimeConfig) {
   const app = express();
   app.use(express.json({ limit: '32kb' }));
 
+  app.get('/', (_req, res) => {
+    res.json({ message: 'Kyorbit real-time service' });
+  });
+
   app.get('/health', (_req, res) => {
     res.json({ ok: true });
   });
@@ -119,7 +123,7 @@ export function createRealtimeServer(config: RealtimeConfig) {
     }
   });
 
-  return { httpServer, io };
+  return { app, httpServer, io };
 }
 
 export type RealtimeServer = ReturnType<typeof createRealtimeServer>;

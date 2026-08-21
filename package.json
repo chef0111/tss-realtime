@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "portless ws.kyorbit --app-port 3331 node --import tsx --watch src/index.ts",
     "start": "portless ws.kyorbit --app-port 3331 node --import tsx src/index.ts",
-    "build": "bun build src/index.ts --outfile index.js --target node --format esm --packages=external",
+    "build": "bun build src/handler.ts --outfile index.js --target node --format esm --packages=external",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },

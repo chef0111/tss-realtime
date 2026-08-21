@@ -1,6 +1,6 @@
-import { loadConfig } from './parse';
-import { createRealtimeServer } from './server';
 import { loadLocalEnv } from './env';
+import { loadConfig } from './parse';
+import { createRealtimeServer } from './create-server';
 
 loadLocalEnv();
 
@@ -16,5 +16,3 @@ httpServer.on('error', (err) => {
 httpServer.listen(config.port, host, () => {
   console.log(`[realtime] listening on ${host}:${config.port}`);
 });
-
-export default httpServer;
